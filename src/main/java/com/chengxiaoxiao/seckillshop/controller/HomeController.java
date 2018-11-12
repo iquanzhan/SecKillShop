@@ -1,5 +1,7 @@
 package com.chengxiaoxiao.seckillshop.controller;
 
+import com.chengxiaoxiao.seckillshop.result.Result;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,8 +16,10 @@ public class HomeController
 {
     @RequestMapping("/index")
     @ResponseBody
-    public String index()
+    public Result index()
     {
-        return "index";
+        return new Result(200, "成功", "hello");
     }
+
+
 }
