@@ -11,7 +11,7 @@ public class Result<T>
     private T data;
 
 
-    public Result(T data)
+    private Result(T data)
     {
         this.data = data;
     }
@@ -30,9 +30,19 @@ public class Result<T>
         return new Result<>(data);
     }
 
+    private Result(CodeMsg cm)
+    {
+        if (cm == null)
+        {
+            return;
+        }
+        this.code = cm.getCode();
+        this.msg = cm.getMsg();
+    }
+
     public static <T> Result<T> error(CodeMsg cm)
     {
-
+        return new Result<>(cm);
     }
 
     public int getCode()
