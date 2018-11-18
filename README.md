@@ -1,7 +1,6 @@
 # SecKillShop
-商品秒杀高并发项目
+主要实现一个商品秒杀的功能，整理梳理如何应对高并发的项目。整理思路
 
-# 相关技术
 [![Twitter](https://img.shields.io/badge/SpringBoot-2.1.0-yellow.svg)](https://wwww.chengxiaoxiao.com/) 
 [![Twitter](https://img.shields.io/badge/JSR%20303-1.0-brightgreen.svg)](https://github.com/iquanzhan/SecKillShop) 
 [![Twitter](https://img.shields.io/badge/MyBatis-1.3.1-green.svg)](https://github.com/iquanzhan/SecKillShop/) 
