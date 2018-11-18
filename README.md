@@ -10,5 +10,7 @@
 
 ### 所用技术
 1.后端：SpringBoot、JSR303、MyBatis
+
 2.前端：Thymeleaf、BootStrap、Jquery
+
 3.中间件：RabbitMQ、Redis、Druid
