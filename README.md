@@ -16,7 +16,7 @@
 3.中间件：RabbitMQ、Redis、Druid
 
 ### 项目搭建
-##### 搭建SpringBoot
+##### 1.搭建SpringBoot
     1.添加maven
         <parent>
             <groupId>org.springframework.boot</groupId>
@@ -35,13 +35,12 @@
         </dependencies>
 
 
-    2.集成thymeleaf
-
-         1.导入依赖
-        <dependency>
-              <groupId>org.springframework.boot</groupId>
-              <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+##### 2.集成thymeleaf
+        1.导入依赖
+            <dependency>
+                  <groupId>org.springframework.boot</groupId>
+                  <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            </dependency>
 
         2.添加配置项：
           spring.thymeleaf.cache=false
@@ -63,7 +62,7 @@
             <p th:text="'hello:'+${name}" ></p>
           </body>
           </html>
-    3.集成MyBatis
+##### 3.集成MyBatis
 
       1.添加依赖
         <dependency>
@@ -79,7 +78,7 @@
         mybatis.configuration.default-statement-timeout=3000
         mybatis.mapperLocations = classpath:com/chengxiaoxiao/seckillshop/dao/*.xml
 
-      4.添加MySql和Druid
+##### 4.添加MySql和Druid
         1.添加依赖
             <dependency>
               <groupId>mysql</groupId>
@@ -112,7 +111,7 @@
             spring.datasource.maxOpenPreparedStatements=20
             logging.leve.com.chengxiaoxiao.seckillshop=debug
 
-      5.安装redis
+##### 5.安装redis
         1.官网：http://www.redis.net.cn/download/
        2.解压安装：
           1.解压文件：tar -zxvf pythontab.tar.gz
