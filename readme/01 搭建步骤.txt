@@ -95,7 +95,7 @@
 		spring.datasource.maxOpenPreparedStatements=20
 		logging.leve.com.chengxiaoxiao.seckillshop=debug
 
-5.安装radis
+5.安装redis
 		一、官网：http://www.redis.net.cn/download/
 		二、解压安装：
 			1.解压文件：tar -zxvf pythontab.tar.gz
@@ -131,12 +131,12 @@
 					<version>1.2.38</version>
 				</dependency>
 		四、添加配置：
-                #redis
-                redis.host=192.168.220.128
-                redis.port=6379
-                redis.timeout=3
-                redis.password=123456
-                redis.poolMaxTotal=10
-                redis.poolMaxIdle=10
-                redis.poolMaxWait=3
+				#redis
+				redis.host=192.168.220.128
+				redis.port=6379
+				redis.timeout=3
+				redis.password=123456
+				redis.poolMaxTotal=10
+				redis.poolMaxIdle=10
+				redis.poolMaxWait=3
 	
