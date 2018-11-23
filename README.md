@@ -112,7 +112,7 @@
             logging.leve.com.chengxiaoxiao.seckillshop=debug
 
 ##### 5.安装redis
-        1.官网：http://www.redis.net.cn/download/
+        1.官网：https://redis.io/download
        2.解压安装：
           1.解压文件：tar -zxvf pythontab.tar.gz
           2.移动到安装目录：mv redis-5.0.0 /usr/local/redis
