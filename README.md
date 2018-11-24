@@ -114,7 +114,7 @@
 ##### 5.安装redis
         1.官网：https://redis.io/download
        2.解压安装：
-          1.解压文件：tar -zxvf pythontab.tar.gz
+          1.解压文件：tar -zxvf redis-5.0.0.tar.gz
           2.移动到安装目录：mv redis-5.0.0 /usr/local/redis
           3.编译一下：make -j 4
             编译依赖gcc，安装如下：
@@ -135,6 +135,9 @@
             config:  /usr/local/redis/redis.config
             log:	/usr/local/redis/redis.log
             data:	/usr/local/redis/data
+          10.查看后台进程是否存在
+            1.查看进程：ps -ef |grep redis
+            2.端口是否在监听：netstat -lntp | grep 6379
         3.添加依赖
               <dependency>
                 <groupId>redis.clients</groupId>
