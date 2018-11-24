@@ -166,6 +166,19 @@
 3. 重启防火墙：firewall-cmd --reload
 4. 查看端口是否开启：firewall-cmd --query-port=6379/tcp
 5. 查看服务：chkconfig --list | grep redis
+
+##### 6.添加集成MD5加密
+1. 添加依赖：
+	<dependency>
+	    <groupId>commons-codec</groupId>
+	    <artifactId>commons-codec</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-lang3</artifactId>
+	    <version>3.6</version>
+	</dependency>
+2.
               
              
 ## 错误记录
