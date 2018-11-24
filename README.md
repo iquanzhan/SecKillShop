@@ -160,14 +160,14 @@
               redis.poolMaxIdle=10
               redis.poolMaxWait=3
 
-##### 5.防火墙开启端口
+##### 6.防火墙开启端口
 1. 获取zone名称：firewall-cmd --get-active-zones
 2. 执行防火墙开启端口：firewall-cmd --zone=public --add-port=6379/tcp --permanent
 3. 重启防火墙：firewall-cmd --reload
 4. 查看端口是否开启：firewall-cmd --query-port=6379/tcp
 5. 查看服务：chkconfig --list | grep redis
 
-##### 6.添加集成MD5加密
+##### 7.添加集成MD5加密
 1. 添加依赖：
 	<dependency>
 	    <groupId>commons-codec</groupId>
@@ -178,7 +178,8 @@
 	    <artifactId>commons-lang3</artifactId>
 	    <version>3.6</version>
 	</dependency>
-2.
+2.调用方法：
+	DigestUtils.md5Hex(src);
               
              
 ## 错误记录
