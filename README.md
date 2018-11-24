@@ -132,6 +132,7 @@
           9.修改redis为系统服务
             1.cd utils
             2.  ./install_server.sh
+            
             config:  /usr/local/redis/redis.config
             log:	/usr/local/redis/redis.log
             data:	/usr/local/redis/data
@@ -164,6 +165,7 @@
 2. 执行防火墙开启端口：firewall-cmd --zone=public --add-port=6379/tcp --permanent
 3. 重启防火墙：firewall-cmd --reload
 4. 查看端口是否开启：firewall-cmd --query-port=6379/tcp
+5. 查看服务：chkconfig --list | grep redis
               
              
 ## 错误记录
