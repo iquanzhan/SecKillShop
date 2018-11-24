@@ -158,3 +158,22 @@
               redis.poolMaxTotal=10
               redis.poolMaxIdle=10
               redis.poolMaxWait=3
+              
+             
+## 错误记录
+1.
+    (1).报错
+    
+```
+    An attempt was made to call the method javax.servlet.ServletContext.getVirtualServerName()Ljava/lang/String; but it does not exist. Its class, javax.servlet.ServletContext, is available from the following locations:
+
+    jar:file:/Users/ac/.gradle/caches/modules-2/files-2.1/javax.servlet/servlet-api/2.4/3fc542fe8bb8164e8d3e840fe7403bc0518053c0/servlet-api-2.4.jar!/javax/servlet/ServletContext.class
+    jar:file:/Users/ac/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/8.5.34/a038040d68a90397f95dd1e11b979fe364a5000f/tomcat-embed-core-8.5.34.jar!/javax/servlet/ServletContext.class
+    
+```
+
+
+    (2).解决：servlet-api版本太低，升级即可，
+        1.下载tomcat.zip包（https://tomcat.apache.org/download-80.cgi），
+        2.找到lib/servlet-api.jar，复制到java jdk目录下/jre/lib/ext下
+
