@@ -158,6 +158,12 @@
               redis.poolMaxTotal=10
               redis.poolMaxIdle=10
               redis.poolMaxWait=3
+
+##### 5.防火墙开启端口
+1. 获取zone名称：firewall-cmd --get-active-zones
+2. 执行防火墙开启端口：firewall-cmd --zone=public --add-port=6379/tcp --permanent
+3. 重启防火墙：firewall-cmd --reload
+4. 查看端口是否开启：firewall-cmd --query-port=6379/tcp
               
              
 ## 错误记录
