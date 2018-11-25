@@ -1,5 +1,6 @@
 package com.chengxiaoxiao.seckillshop.controller;
 
+import com.chengxiaoxiao.seckillshop.domain.MiaoshaUser;
 import com.chengxiaoxiao.seckillshop.domain.User;
 import com.chengxiaoxiao.seckillshop.redis.RedisService;
 import com.chengxiaoxiao.seckillshop.redis.UserKey;
@@ -63,10 +64,10 @@ public class HomeController {
 
     @ResponseBody
     @RequestMapping("/redis")
-    public Result<User> redis() {
+    public Result<MiaoshaUser> redis() {
         redisService.set(UserKey.getUserById, "key1", new User(1, "Tom"));
 
-        User user = redisService.get(UserKey.getUserById, "key1", User.class);
+        MiaoshaUser user = redisService.get(UserKey.getUserById, "key1", MiaoshaUser.class);
 
         return Result.success(user);
     }

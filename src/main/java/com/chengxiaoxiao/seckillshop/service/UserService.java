@@ -1,8 +1,9 @@
 package com.chengxiaoxiao.seckillshop.service;
 
 import com.chengxiaoxiao.seckillshop.dao.UserDao;
-import com.chengxiaoxiao.seckillshop.domain.User;
+import com.chengxiaoxiao.seckillshop.domain.MiaoshaUser;
 
+import com.chengxiaoxiao.seckillshop.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class UserService
     @Autowired
     UserDao userDao;
 
-    public User getById(int id)
+    public MiaoshaUser getById(int id)
     {
         return userDao.getById(id);
     }
