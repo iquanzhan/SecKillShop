@@ -1,6 +1,7 @@
 package com.chengxiaoxiao.seckillshop.controller;
 
 import com.chengxiaoxiao.seckillshop.domain.MiaoshaUser;
+import com.chengxiaoxiao.seckillshop.exception.GlobleException;
 import com.chengxiaoxiao.seckillshop.result.CodeMsg;
 import com.chengxiaoxiao.seckillshop.result.Result;
 import com.chengxiaoxiao.seckillshop.service.MiaoshaService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.StringUtils;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -33,25 +35,9 @@ public class LoginController {
 
     @RequestMapping("/do_login")
     @ResponseBody
-    public Result<String> doLogin(@Valid UserVo userVo) {
+    public Result<Boolean> doLogin(HttpServletResponse response, @Valid UserVo userVo) {
+        boolean result = miaoshaService.login(response, userVo);
 
-        MiaoshaUser miaoshaUser = miaoshaService.getUserById(Long.valueOf(userVo.getMobile()));
-        if (null == miaoshaUser) {
-            return Result.error(CodeMsg.MOBILE_NOT_EXIST);
-        }
-
-        log.info("用户进入【用户登录】界面");
-
-        String dbPass = miaoshaUser.getPassword();
-        String saltDb = miaoshaUser.getSalt();
-
-        String calcPass = MD5Util.formPassToDBPass(userVo.getPassword(), saltDb);
-
-        if (calcPass.equals(dbPass)) {
-            return Result.success("登录成功");
-        } else {
-            return Result.error(CodeMsg.MOBILE_PASSWORD_ERROR);
-        }
-
+        return Result.success(true);
     }
 }
