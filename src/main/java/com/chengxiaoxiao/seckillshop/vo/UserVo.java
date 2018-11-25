@@ -1,7 +1,18 @@
 package com.chengxiaoxiao.seckillshop.vo;
 
+import com.chengxiaoxiao.seckillshop.validator.IsMobile;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
+
 public class UserVo {
+
+    @NotNull
+    @IsMobile
     private String mobile;
+
+    @NotNull
+    @Length(min = 32)
     private String password;
 
     public String getMobile() {

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.StringUtils;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/login")
 public class LoginController {
@@ -31,16 +33,7 @@ public class LoginController {
 
     @RequestMapping("/do_login")
     @ResponseBody
-    public Result<String> doLogin(UserVo userVo) {
-        if (StringUtils.isEmpty(userVo.getMobile())) {
-            return Result.error(CodeMsg.MOBILE_EMPTY);
-        }
-        if (!ValidatorUtil.isMobile(userVo.getMobile())) {
-            return Result.error(CodeMsg.MOBILE_ERROR);
-        }
-        if (StringUtils.isEmpty(userVo.getPassword())) {
-            return Result.error(CodeMsg.PASSWORD_EMPTY);
-        }
+    public Result<String> doLogin(@Valid UserVo userVo) {
 
         MiaoshaUser miaoshaUser = miaoshaService.getUserById(Long.valueOf(userVo.getMobile()));
         if (null == miaoshaUser) {

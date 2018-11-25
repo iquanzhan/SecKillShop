@@ -169,18 +169,68 @@
 
 ##### 7.添加集成MD5加密
 1. 添加依赖：
-	<dependency>
-	    <groupId>commons-codec</groupId>
-	    <artifactId>commons-codec</artifactId>
-	</dependency>
-	<dependency>
-	    <groupId>org.apache.commons</groupId>
-	    <artifactId>commons-lang3</artifactId>
-	    <version>3.6</version>
-	</dependency>
+```
+<dependency>
+    <groupId>commons-codec</groupId>
+    <artifactId>commons-codec</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>3.6</version>
+</dependency>
+```
+	
 2.调用方法：
+
 	DigestUtils.md5Hex(src);
-              
+
+##### 8.添加JSR303校验
+###### 1.添加依赖
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+``` 
+###### 2.Controller中Vo上添加注解@Valid
+
+###### 3.自定义注解
+    
+>1.添加注解类实现方法，注解类模板：
+```
+@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
+@Retention(RUNTIME)
+@Documented
+@Constraint(validatedBy = {IsMobileValidator.class })
+public @interface IsMobile {
+
+    String message() default "手机号码格式错误";
+
+    Class<?>[] groups() default { };
+
+    Class<? extends Payload>[] payload() default { };
+
+}
+```
+
+>2.添加注解校验规则类
+```
+public class IsMobileValidator implements ConstraintValidator<IsMobile, String> {
+    @Override
+    public void initialize(IsMobile constraintAnnotation) {
+        
+    }
+
+    @Override
+    public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
+        return true;
+    }
+}
+```
+    
+
+2.使用
              
 ## 错误记录
 1.
