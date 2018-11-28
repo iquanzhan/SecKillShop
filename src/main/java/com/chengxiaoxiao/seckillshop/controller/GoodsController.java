@@ -20,18 +20,9 @@ public class GoodsController {
     @Autowired
     MiaoshaUserService miaoshaService;
 
-
     @RequestMapping("/to_list")
-    public String toList(Model model, HttpServletResponse response, @CookieValue(value = miaoshaService.LOGIN_COOKIE_TOKEN, required = false) String cookieToken,
-                         @RequestParam(value = miaoshaService.LOGIN_COOKIE_TOKEN, required = false) String paramsToken) {
+    public String toList(Model model, MiaoshaUser user) {
 
-        if (StringUtils.isEmpty(cookieToken) && StringUtils.isEmpty(paramsToken)) {
-            return "login";
-        }
-        String token = StringUtils.isEmpty(paramsToken) ? cookieToken : paramsToken;
-
-        MiaoshaUser user = miaoshaService.getMiaoshaUserByToken(token, response);
-        //
         model.addAttribute("user", user);
         return "goodlist";
     }
