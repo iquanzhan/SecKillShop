@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.util.StringUtils;
 
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping("/goods")
 public class GoodsController {
@@ -20,7 +22,7 @@ public class GoodsController {
 
 
     @RequestMapping("/to_list")
-    public String toList(Model model, @CookieValue(value = miaoshaService.LOGIN_COOKIE_TOKEN, required = false) String cookieToken,
+    public String toList(Model model, HttpServletResponse response, @CookieValue(value = miaoshaService.LOGIN_COOKIE_TOKEN, required = false) String cookieToken,
                          @RequestParam(value = miaoshaService.LOGIN_COOKIE_TOKEN, required = false) String paramsToken) {
 
         if (StringUtils.isEmpty(cookieToken) && StringUtils.isEmpty(paramsToken)) {
@@ -28,7 +30,7 @@ public class GoodsController {
         }
         String token = StringUtils.isEmpty(paramsToken) ? cookieToken : paramsToken;
 
-        MiaoshaUser user = miaoshaService.getMiaoshaUserByToken(token);
+        MiaoshaUser user = miaoshaService.getMiaoshaUserByToken(token, response);
         //
         model.addAttribute("user", user);
         return "goodlist";

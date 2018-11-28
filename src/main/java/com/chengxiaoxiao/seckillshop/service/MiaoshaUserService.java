@@ -45,13 +45,30 @@ public class MiaoshaUserService {
 
         String dbPass = miaoshaUser.getPassword();
         String saltDb = miaoshaUser.getSalt();
-        //
+        // md5 password 2 times
         String calcPass = MD5Util.formPassToDBPass(userVo.getPassword(), saltDb);
 
         if (!calcPass.equals(dbPass)) {
             throw new GlobleException(CodeMsg.MOBILE_PASSWORD_ERROR);
         }
+        addCookie(miaoshaUser, response);
 
+        return false;
+    }
+
+    public MiaoshaUser getMiaoshaUserByToken(String token, HttpServletResponse response) {
+        if (StringUtils.isEmpty(token)) {
+            return null;
+        }
+        MiaoshaUser user = redisService.get(MiaoshaKey.token, token, MiaoshaUser.class);
+        //when user login and use the website,extend to the cookie datetime
+        if (user != null) {
+            addCookie(user, response);
+        }
+        return user;
+    }
+
+    public void addCookie(MiaoshaUser miaoshaUser, HttpServletResponse response) {
         String token = UUIDUtil.uuid();
         redisService.set(MiaoshaKey.token, token, miaoshaUser);
 
@@ -59,14 +76,6 @@ public class MiaoshaUserService {
         cookie.setMaxAge(MiaoshaKey.token.expireSeconds());
         cookie.setPath("/");
         response.addCookie(cookie);
-        return false;
-    }
-
-    public MiaoshaUser getMiaoshaUserByToken(String token) {
-        if (StringUtils.isEmpty(token)) {
-            return null;
-        }
-        return redisService.get(MiaoshaKey.token, token, MiaoshaUser.class);
     }
 
 }
