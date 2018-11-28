@@ -12,14 +12,15 @@ import com.chengxiaoxiao.seckillshop.util.UUIDUtil;
 import com.chengxiaoxiao.seckillshop.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 @Service
-public class MiaoshaService {
+public class MiaoshaUserService {
 
-    private static final String LOGIN_COOKIE_TOKEN = "token";
+    public static final String LOGIN_COOKIE_TOKEN = "token";
 
 
     @Autowired
@@ -44,7 +45,7 @@ public class MiaoshaService {
 
         String dbPass = miaoshaUser.getPassword();
         String saltDb = miaoshaUser.getSalt();
-
+        //
         String calcPass = MD5Util.formPassToDBPass(userVo.getPassword(), saltDb);
 
         if (!calcPass.equals(dbPass)) {
@@ -60,4 +61,12 @@ public class MiaoshaService {
         response.addCookie(cookie);
         return false;
     }
+
+    public MiaoshaUser getMiaoshaUserByToken(String token) {
+        if (StringUtils.isEmpty(token)) {
+            return null;
+        }
+        return redisService.get(MiaoshaKey.token, token, MiaoshaUser.class);
+    }
+
 }
