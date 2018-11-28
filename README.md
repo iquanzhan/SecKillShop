@@ -228,9 +228,17 @@ public class IsMobileValidator implements ConstraintValidator<IsMobile, String> 
     }
 }
 ```
-    
-
 2.使用
+> Vo对应属性上增加注解，实现校验
+
+#### 9.优化登录成功后，需要多次获取Cookie
+> 1.自定义类，继承自WebMvcConfigurerAdapter，并添加@Configuration注解,使用参数解析器，重写addArgumentResolvers方法，添加自定义的解析器
+
+> 2.自定义参数解析器，实现HandlerMethodArgumentResolver接口，重写supportsParameter和resolveArgument。
+
+> 3.这样就可以直接在参数中增加对应的user，直接获取值了
+
+
              
 ## 错误记录
 1.
