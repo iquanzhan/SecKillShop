@@ -51,7 +51,9 @@ public class MiaoshaUserService {
         if (!calcPass.equals(dbPass)) {
             throw new GlobleException(CodeMsg.MOBILE_PASSWORD_ERROR);
         }
-        addCookie(miaoshaUser, response);
+        //不用每次都生成新的uuid
+        String token = UUIDUtil.uuid();
+        addCookie(miaoshaUser, token, response);
 
         return false;
     }
@@ -63,13 +65,13 @@ public class MiaoshaUserService {
         MiaoshaUser user = redisService.get(MiaoshaKey.token, token, MiaoshaUser.class);
         //when user login and use the website,extend to the cookie datetime
         if (user != null) {
-            addCookie(user, response);
+            addCookie(user, token, response);
         }
         return user;
     }
 
-    public void addCookie(MiaoshaUser miaoshaUser, HttpServletResponse response) {
-        String token = UUIDUtil.uuid();
+    public void addCookie(MiaoshaUser miaoshaUser, String token, HttpServletResponse response) {
+
         redisService.set(MiaoshaKey.token, token, miaoshaUser);
 
         Cookie cookie = new Cookie(LOGIN_COOKIE_TOKEN, token);

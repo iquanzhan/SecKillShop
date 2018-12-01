@@ -1,44 +1,28 @@
-package com.chengxiaoxiao.seckillshop.domain;
+package com.chengxiaoxiao.seckillshop.vo;
+
+import com.chengxiaoxiao.seckillshop.domain.Goods;
 
 import java.util.Date;
 
 /**
- * @ClassName MiaoshaGoods
+ * @ClassName GoodsVo
  * @Author Cheng XiaoXiao
  * @GitHub https://github.com/iquanzhan
  * @Blog http://www.chengxiaoxiao.com
- * @Date 18-12-1 下午12:58
- * @descript 秒杀商品实体类
+ * @Date 18-12-1 下午1:27
+ * @descript Goods中扩展而来，为了展现前台商品列表
  */
-public class MiaoshaGoods {
-    private Long id;
-    private Long goodsId;
+public class GoodsVo extends Goods {
     private Double miaoshaPrice;
     private Integer stockCount;
     private Date startDate;
     private Date endDate;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getGoodsId() {
-        return goodsId;
-    }
-
-    public void setGoodsId(Long goodsId) {
-        this.goodsId = goodsId;
-    }
-
     public Double getMiaoshaPrice() {
         return miaoshaPrice;
     }
 
-    public void setMiaoshaPrice(double miaoshaPrice) {
+    public void setMiaoshaPrice(Double miaoshaPrice) {
         this.miaoshaPrice = miaoshaPrice;
     }
 
