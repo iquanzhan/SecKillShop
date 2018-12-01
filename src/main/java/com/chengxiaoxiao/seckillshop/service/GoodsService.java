@@ -1,6 +1,7 @@
 package com.chengxiaoxiao.seckillshop.service;
 
 import com.chengxiaoxiao.seckillshop.dao.GoodsDao;
+import com.chengxiaoxiao.seckillshop.domain.MiaoshaOrder;
 import com.chengxiaoxiao.seckillshop.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,6 @@ public class GoodsService {
     @Autowired
     GoodsDao goodsDao;
 
-
     public List<GoodsVo> listGoodsVo() {
         return goodsDao.listGoodsVo();
     }
@@ -30,4 +30,7 @@ public class GoodsService {
         return goodsDao.getGoodsVoById(id);
     }
 
+    public void reduceStock(GoodsVo goodsVo) {
+        goodsDao.reduceStock(goodsVo.getId());
+    }
 }

@@ -6,8 +6,8 @@ public class Goods {
     private String goodsTitle;
     private String goodsImg;
     private String goodsDetails;
-    private String goodsPrice;
-    private String goodsStock;
+    private Double goodsPrice;
+    private Integer goodsStock;
 
     public Long getId() {
         return id;
@@ -49,19 +49,19 @@ public class Goods {
         this.goodsDetails = goodsDetails;
     }
 
-    public String getGoodsPrice() {
+    public Double getGoodsPrice() {
         return goodsPrice;
     }
 
-    public void setGoodsPrice(String goodsPrice) {
+    public void setGoodsPrice(Double goodsPrice) {
         this.goodsPrice = goodsPrice;
     }
 
-    public String getGoodsStock() {
+    public Integer getGoodsStock() {
         return goodsStock;
     }
 
-    public void setGoodsStock(String goodsStock) {
+    public void setGoodsStock(Integer goodsStock) {
         this.goodsStock = goodsStock;
     }
 }
