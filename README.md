@@ -238,6 +238,87 @@ public class IsMobileValidator implements ConstraintValidator<IsMobile, String> 
 
 > 3.这样就可以直接在参数中增加对应的user，直接获取值了
 
+# Jemter压力测试
+> 1.官网：[http://jmeter.apache.org/](http://jmeter.apache.org/)
+
+> 2.下载地址[http://jmeter.apache.org/download_jmeter.cgi](http://jmeter.apache.org/download_jmeter.cgi)
+
+> 3.修改界面为中文：
+
+        找到jmeter下的bin目录，打开jmeter.properties 文件
+        第三十七行修改为
+        language=zh_CN
+
+> 3.基本步骤：
+    
+        1.添加线程组
+        2.添加HTTP请求配置器：
+        
+# SpringBoot 打war包
+> 1.添加依赖
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+> 2.添加plugins
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+> 3.修改打包方式为war
+
+    <packaging>war</packaging>
+    
+> 4.mainApplication需要继承SpringBootServletInitializer,并重写configure方法
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(MainApplication.class);
+    }
+> 5.项目根目录打包：mvn clean package
+> 6.放tomcat目录下，启动（解决需要增加应用名）
+    1.可以把context设置为空
+    2.直接放到ROOT目录下
+    
+# 页面优化
+一、页面缓存
+   
+   把页面渲染好的页面缓存放入redis
+   
+    实现代码：
+    
+    1.SpringBoot 2.0写法
+    
+    //取缓存
+    WebContext ctx = new WebContext(request, response, request.getServletContext(), request.getLocale(), model.asMap());
+    html = thymeleafViewResolver.getTemplateEngine().process("goodlist", ctx);
+    if (!StringUtils.isEmpty(html)) {
+        redisService.set(GoodsKey.getGoodList, "", html);
+    }
+    
+    2.SpringBoot 1.0写法
+    
+    SpringWebContext context = new SpringWebContext(request,response,request.getServletContext(),request.getLocale(),model.asMap(),applicationContext);
+    String html = thymeleafViewResolver.getTemplateEngine().process("goods_list",context);
+
+二、对象缓存
+> 1.在Service中，取Dao的数据时，先取redis的数据，如果redis中没有才取数据库的数据。
+当数据库数据修改时，自动修改redis的数据
+
+三、页面静态化
+> 1.vue，angular进行页面静态化，减少服务器请求 
+
+
+
+
 
              
 ## 错误记录
