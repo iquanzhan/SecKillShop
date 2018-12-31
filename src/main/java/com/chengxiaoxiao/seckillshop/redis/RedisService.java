@@ -67,6 +67,45 @@ public class RedisService {
     }
 
     /**
+     * 判断当前键值对是否存在
+     * @param prefix
+     * @param key
+     * @return
+     */
+    public boolean exist(KeyPrefix prefix, String key) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            String realKey = prefix.getPrefix() + key;
+
+            return jedis.exists(realKey);
+
+        } finally {
+            returnToPool(jedis);
+        }
+
+    }
+
+    /**
+     * 删除键值对
+     * @param prefix
+     * @param key
+     * @return
+     */
+    public boolean detete(KeyPrefix prefix, String key) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            String realKey = prefix.getPrefix() + key;
+            Long del = jedis.del(realKey);
+            return del > 0;
+
+        } finally {
+            returnToPool(jedis);
+        }
+    }
+
+    /**
      * bean to string，实体转换为JSON字符串
      * @param data
      * @param <T>

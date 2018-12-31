@@ -20,6 +20,7 @@ public class CodeMsg {
     public static CodeMsg MOBILE_ERROR = new CodeMsg(500202, "手机号码格式错误");
     public static CodeMsg MOBILE_NOT_EXIST = new CodeMsg(500202, "手机号码不存在");
     public static CodeMsg MOBILE_PASSWORD_ERROR = new CodeMsg(500202, "用户名或者密码错误");
+    public static CodeMsg SESSION_ERROR = new CodeMsg(500202, "身份验证失败，请重新登录");
 
     //秒杀模块
     public static CodeMsg MIAOSHA_OVER = new CodeMsg(500300, "商品已经秒杀完毕");

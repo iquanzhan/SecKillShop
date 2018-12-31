@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!-- jquery -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>
+    <!-- jquery-validator -->
+    <script type="text/javascript" src="/jquery-validation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/jquery-validation/localization/messages_zh.min.js"></script>
+    <!-- layer -->
+    <script type="text/javascript" src="/layer/layer.js"></script>
+    <!-- md5.js -->
+    <script type="text/javascript" src="/js/md5.min.js"></script>
+    <!-- common.js -->
+    <script type="text/javascript" src="/js/common.js"></script>
+    <title>商品详情</title>
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-heading">秒杀商品详情</div>
+    <div class="panel-body" id="userTip">
+        <span> 您还没有登录，请登陆后再操作<br/></span>
+        <span>没有收货地址的提示。。。</span>
+    </div>
+    <table class="table" id="goodslist">
+        <tr>
+            <td>商品名称</td>
+            <td colspan="3" id="goodName"></td>
+        </tr>
+        <tr>
+            <td>商品图片</td>
+            <td colspan="3"><img id="goodImage" width="200" height="200"/></td>
+        </tr>
+        <tr>
+            <td>秒杀开始时间</td>
+            <td id="startTime"></td>
+            <td id="miaoshaTip">
+                <input type="hidden" id="remainSeconds"/>
+                <span>秒杀倒计时：<span id="countDown"></span>秒</span>
+                <span>秒杀进行中</span>
+                <span>秒杀已结束</span>
+            </td>
+            <td>
+                <form id="miaoshaForm" method="post" action="/miaosha/do_miaosha">
+                    <button class="btn btn-primary btn-block" type="submit" onclick="doMiaosha()" id="buyButton">立即秒杀</button>
+                    <input type="hidden" name="goodsId"/>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>商品原价</td>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <td>秒杀价</td>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <td>库存数量</td>
+            <td colspan="3"></td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    $(function () {
+        getDetail();
+    })
+
+    function getDetail() {
+        var goodsId = g_getQueryString("goodsId");
+        $.ajax({
+            url: '/goods/detail/' + goodsId,
+            type: 'GET',
+            success: function (res) {
+                if (res.code == 0) {
+                    renderDetail(res.data)
+                }
+                else {
+                    layer.msg(res.msg);
+                }
+
+            },
+            error: function (err) {
+
+            }
+        })
+    }
+
+    function renderDetail(data) {
+        var goodsVo = data.goodsVo;
+        var user = data.user;
+        var miaoshaStatus = data.miaoshaStatus;
+        var remainSeconds = data.remainSeconds;
+        if (user) {
+            $("#userTip").hide();
+        }
+        $("#goodName").text(goodsVo.goodsName);
+        $("#goodImage").attr("src", goodsVo.goodsImg);
+        $("#startTime").text(goodsVo.startDate);
+
+
+        debugger;
+
+    }
+
+
+    /** 进行秒杀*/
+    function doMiaosha() {
+        $.ajax({
+            url: '/miaosha/do_miaosha2',
+            type: 'GET',
+            success: function (data) {
+
+            },
+            error: function (data) {
+
+            }
+        })
+    }
+
+
+</script>
+
+</body>
+</html>

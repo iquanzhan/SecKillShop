@@ -26,7 +26,7 @@
         <properties>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         </properties>
-
+    
         <dependencies>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -41,7 +41,7 @@
                   <groupId>org.springframework.boot</groupId>
                   <artifactId>spring-boot-starter-thymeleaf</artifactId>
             </dependency>
-
+    
         2.添加配置项：
           spring.thymeleaf.cache=false
           spring.thymeleaf.content-type=text/html
@@ -50,7 +50,7 @@
           spring.thymeleaf.mode=HTML5
           spring.thymeleaf.prefix=classpath:/templates/
           spring.thymeleaf.suffix=.html
-
+    
         3.添加thymeleaf模版
           <!DOCTYPE HTML>
           <html xmlns:th="http://www.thymeleaf.org">
@@ -84,7 +84,7 @@
               <groupId>mysql</groupId>
               <artifactId>mysql-connector-java</artifactId>
             </dependency>
-
+    
             <dependency>
               <groupId>com.alibaba</groupId>
               <artifactId>druid</artifactId>
@@ -144,7 +144,7 @@
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
               </dependency>
-
+    
               <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
@@ -180,7 +180,7 @@
     <version>3.6</version>
 </dependency>
 ```
-	
+
 2.调用方法：
 
 	DigestUtils.md5Hex(src);
@@ -192,11 +192,11 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-validation</artifactId>
 </dependency>
-``` 
+```
 ###### 2.Controller中Vo上添加注解@Valid
 
 ###### 3.自定义注解
-    
+
 >1.添加注解类实现方法，注解类模板：
 ```
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
@@ -250,10 +250,10 @@ public class IsMobileValidator implements ConstraintValidator<IsMobile, String> 
         language=zh_CN
 
 > 3.基本步骤：
-    
+
         1.添加线程组
         2.添加HTTP请求配置器：
-        
+
 # SpringBoot 打war包
 > 1.添加依赖
 
@@ -276,7 +276,7 @@ public class IsMobileValidator implements ConstraintValidator<IsMobile, String> 
 > 3.修改打包方式为war
 
     <packaging>war</packaging>
-    
+
 > 4.mainApplication需要继承SpringBootServletInitializer,并重写configure方法
 
     @Override
@@ -287,12 +287,12 @@ public class IsMobileValidator implements ConstraintValidator<IsMobile, String> 
 > 6.放tomcat目录下，启动（解决需要增加应用名）
     1.可以把context设置为空
     2.直接放到ROOT目录下
-    
+
 # 页面优化
 一、页面缓存
-   
+
    把页面渲染好的页面缓存放入redis
-   
+
     实现代码：
     
     1.SpringBoot 2.0写法
@@ -318,13 +318,55 @@ public class IsMobileValidator implements ConstraintValidator<IsMobile, String> 
 
 
 
+### 热部署问题：
+
+```
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+    </dependency>
+</dependencies>
+```
+
+添加maven后，会自动添加热部署功能。但需要进行重新编译才可以实现更新
 
 
-             
+
+### 静态资源优化
+
+1.JS/CSS压缩
+
+2.多个CSS/JS合并，减少链接
+
+### 集成RabbitMQ
+
+1.安装erlong
+
+​	1.安装依赖：
+
+```
+yum install ncurses-devel
+```
+
+​	2.下载erlang包，编译安装
+
+​		1)http://www.erlang.org/downloads
+
+​		2)
+
+2.安装RabbitMQ
+
+​	1.下载地址：http://www.rabbitmq.com/install-generic-unix.html
+
+​	2.
+
+
 ## 错误记录
 1.
-    (1).报错
-    
+​    (1).报错
+​    
 ```
     An attempt was made to call the method javax.servlet.ServletContext.getVirtualServerName()Ljava/lang/String; but it does not exist. Its class, javax.servlet.ServletContext, is available from the following locations:
 

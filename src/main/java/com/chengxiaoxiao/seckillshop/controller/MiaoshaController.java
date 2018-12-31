@@ -9,6 +9,7 @@ import com.chengxiaoxiao.seckillshop.service.GoodsService;
 import com.chengxiaoxiao.seckillshop.service.MiaoshaService;
 import com.chengxiaoxiao.seckillshop.service.OrderService;
 import com.chengxiaoxiao.seckillshop.vo.GoodsVo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,5 +60,25 @@ public class MiaoshaController {
         model.addAttribute("goods", goodsVo);
 
         return "order_details";
+    }
+    @RequestMapping("/do_miaosha2")
+    public Result doMiaosha2(Model model, MiaoshaUser user, @RequestParam("goodsId") long goodsId) {
+        if (user == null) {
+            return Result.error(CodeMsg.SESSION_ERROR);
+        }
+        GoodsVo goodsVo = goodsService.getGoodsVoById(goodsId);
+        if (goodsVo.getStockCount() <= 0) {
+            return Result.error(CodeMsg.MIAOSHA_OVER);
+        }
+
+        //判断是否已经秒杀到了
+        MiaoshaOrder miaoshaOrder = orderService.getMiaoshaOrderByUserIdGoodsId(user.getId(), goodsId);
+        if (miaoshaOrder != null) {
+            return Result.error(CodeMsg.MIAOSHA_REPEAT);
+        }
+        //下单
+        OrderInfo orderInfo = miaoshaService.miaosha(user, goodsVo);
+
+        return Result.success(orderInfo);
     }
 }
